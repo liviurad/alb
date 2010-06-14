@@ -50,11 +50,11 @@ class Config
   const ALBUM_NAME_TRUNC_SUFFIX = '...';
 
   // gallery title
-  const TITLE = "RDDfoto";
+  const TITLE = "Alb Demo";
   // text displayed right under title
-  const DESC  = "by Liv";
+  const DESC  = "http://github.com/liviurad/alb - click \"Download Source\" button";
   // text displayed at the bottom, html allowed
-  const FOOTER_TEXT = "RDDfoto, 2010";
+  const FOOTER_TEXT = "Copyright (C) 2010 Liviu Radulescu";
   # TODO: keywords, SEO
 
   // language
