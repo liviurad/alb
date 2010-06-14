@@ -1,0 +1,2 @@
+Copy your folders with photos into this folder.
+One folder coresponds to one album. You can use subfolders too.

@@ -1,0 +1,28 @@
+"Alb" - very simple photo gallery written in PHP
+
+HOWTO
+=====
+
+- uploading photos is done via FTP (most probably there won't be other way for uploading)
+- simply place your folders/albums with photos into 'photos/' folder (default). That should be all.
+
+Details/Features
+================
+
+- read and customize config.php
+- the look of your gallery can be customized, see config.php where you can change the template and/or css used
+- no DBs are used and won't be in the future versions
+- photos are resized on server to fit user's browser window
+- resized versions are cached. Please set 777 permisions to 'cache/' folder (default)
+- uses a slightly modified slimbox2 to display photos
+
+
+TODO
+====
+
+- clean up cache based on files access. 
+  - trigger this action when first photo is displayed. Most probably user is looking at an album and will stay on current page.
+- show more info from EXIF
+- create textfile per album where one can customize album a bit or set some values:
+  - (re)name is photo/album
+  - setup maximum size for display (S M L XL X2 X3)
