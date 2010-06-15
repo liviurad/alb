@@ -1,3 +1,8 @@
+v0.9 - switch to ImageMagick
+- resize is now done with imagemagick (seems to be more reliable than GD)
+- border added (not customizable yet)
+- other small visual changes
+
 v0.8 - Initial version
 DONE:
 - uploading photos is done via FTP (most probably there won't be other way for uploading)

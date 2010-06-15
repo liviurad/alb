@@ -15,19 +15,19 @@
 	position: absolute;
 	z-index: 9999;
 	overflow: hidden;
-	background-color: #444;
+	background-color: #5C5E61;
 }
 
 .lbLoading {
-	/*background: #444 url(loading.gif) no-repeat center;*/
-  background: #444;
+	/*background: #5C5E61 url(loading.gif) no-repeat center;*/
+  background: #5C5E61;
 }
 
 #lbImage {
 	position: absolute;
 	left: 0;
 	top: 0;
-	border: 10px solid #444;
+	border: 7px solid #5C5E61;
 	background-repeat: no-repeat;
 }
 
@@ -61,7 +61,7 @@
 	color: #ddd;
 	line-height: 1.4em;
 	text-align: left;
-	border: 10px solid #444;
+	border: 7px solid #5C5E61;
 	border-top-style: none;
 }
 

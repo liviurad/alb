@@ -31,21 +31,13 @@ if (!file_exists($photo)) {
 }
 
 $ext = "";
-if (preg_match("/(jpg|jpeg)$/i", $photo)) {
-  header('Content-type: image/jpeg');
-  $ext = "jpg";
-}
-elseif (preg_match("/(png)$/i", $photo)) {
-  header('Content-type: image/png');
-  $ext = "png";
-}
-elseif (preg_match("/(gif)$/i", $photo)) {
-  header('Content-type: image/gif');
-  $ext = "gif";
-}
+if (preg_match("/(jpg|jpeg)$/i", $photo)) $ext = "jpg";
+elseif (preg_match("/(png)$/i", $photo)) $ext = "png";
+elseif (preg_match("/(gif)$/i", $photo)) $ext = "gif";
 
 
-$imgsize = GetImageSize($photo);
+$imgsize = getimagesize($photo);
+@error_log("$photo {$imgsize['mime']} {$imgsize['type']}");
 $width = $imgsize[0];
 $height = $imgsize[1];
 
@@ -105,34 +97,36 @@ elseif ($new_height) {
 $logline = "INFO: $photo ($size, W {$sw}x{$sh}) - resize ({$width}x{$height} => {$new_width}x{$new_height})";
 
 $cache_filename = md5("$size alb $photo");
-$cachedphoto = Config::CACHE_PATH . $cache_filename;
+$cachedphoto = Config::CACHE_PATH . $cache_filename . '.' . $ext;
 if (file_exists($cachedphoto)) {
   $logline .= " - CACHE HIT ($cachedphoto)";
   $photo = $cachedphoto;
 }
-
-$new_im = ImageCreatetruecolor($new_width, $new_height);
-if ($ext == "jpg") $im = ImageCreateFromJPEG($photo);
-elseif ($ext == "png") $im = ImageCreateFromPNG($photo);
-elseif ($ext == "gif") $im = ImageCreateFromGIF($photo);
-
-if ($new_height < $height && $photo != $cachedphoto) {
-  imagecopyresampled($new_im, $im, 0, 0, $xoffset, $yoffset, $new_width, $new_height, $width, $height);
-}
 else {
-  $new_im = $im;
-}
-if ($ext == "jpg") ImageJPEG($new_im, null, 75);
-elseif ($ext == "png") ImagePNG($new_im, null);
-elseif ($ext == "gif") ImageGIF($new_im, null);
-
-if ($photo != $cachedphoto) {
-  if ($ext == "jpg") ImageJPEG($new_im, $cachedphoto, 75);
-  elseif ($ext == "png") ImagePNG($new_im, $cachedphoto);
-  elseif ($ext == "gif") ImageGIF($new_im, $cachedphoto);
+  if ($size === 'thumb') {
+    $cmd = "convert -verbose \"" . $photo . "\" -crop {$width}x{$height}+{$xoffset}+{$yoffset} -thumbnail {$new_height}x{$new_height} -quality 50 \"" . $cachedphoto . "\"";
+  }
+  else {
+    $cmd = "convert -verbose \"" . $photo . "\" -resize {$new_width}x{$new_height} -bordercolor \"#9999A9\" -border 1 -bordercolor black -border 2 -quality 75 \"" . $cachedphoto . "\"";
+  }
+  @exec($cmd, $output, $ret_var);
+  if ($ret_var) {
+    @error_log("ERROR: Resizing image ($photo) failed. Command was: $cmd");
+    die("ERROR: Resizing image ($photo) failed.");
+  }
   $logline .= " - CACHE CREATED ($cachedphoto)";
 }
 
+if (preg_match("/(jpg|jpeg)$/i", $photo)) header('Content-type: image/jpeg');
+elseif (preg_match("/(png)$/i", $photo)) header('Content-type: image/png');
+elseif (preg_match("/(gif)$/i", $photo)) header('Content-type: image/gif');
+header("Content-Length: " . filesize($cachedphoto));
+
+$fp = fopen($cachedphoto, "rb");
+fpassthru($fp);
+fclose($fp);
+
 $logline .= " - took " .  Utils::stopwatch($st);
 @error_log($logline);
+
 ?>
