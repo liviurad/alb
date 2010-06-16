@@ -1,3 +1,7 @@
+v0.91 - improvements
+- image quality used when resizing can be customized, see config.php
+- include some config values in the cached filenames in order to make config changes visible without manually clearing the cache
+
 v0.9 - switch to ImageMagick
 - resize is now done with imagemagick (seems to be more reliable than GD)
 - border added (not customizable yet)

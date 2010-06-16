@@ -67,6 +67,8 @@ class Config
   // images dimensions (heights) to chose from when tries to fit picture to user browser visible area
   static $DIMS = array("T" => 120, "S" => 270, "M" => 400, "L" => 540, "XL" => 680, "X2" => 860, "X3" => 1040);
 
+  const IMG_QUALITY = 85;
+
 
   // breadcrumb nav delimiter
   const BT_NAV_DELIM = ">";

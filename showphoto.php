@@ -96,7 +96,14 @@ elseif ($new_height) {
 
 $logline = "INFO: $photo ($size, W {$sw}x{$sh}) - resize ({$width}x{$height} => {$new_width}x{$new_height})";
 
-$cache_filename = md5("$size alb $photo");
+$quality = Config::IMG_QUALITY;
+
+if ($size === 'thumb') {
+  $cache_filename = md5('thumb' . $size . $photo . $squared . Config::THUMBS_SIZE);
+}
+else {
+  $cache_filename = md5('photo' . $size . $photo . $quality);
+}
 $cachedphoto = Config::CACHE_PATH . $cache_filename . '.' . $ext;
 if (file_exists($cachedphoto)) {
   $logline .= " - CACHE HIT ($cachedphoto)";
@@ -104,10 +111,10 @@ if (file_exists($cachedphoto)) {
 }
 else {
   if ($size === 'thumb') {
-    $cmd = "convert -verbose \"" . $photo . "\" -crop {$width}x{$height}+{$xoffset}+{$yoffset} -thumbnail {$new_height}x{$new_height} -quality 50 \"" . $cachedphoto . "\"";
+    $cmd = "convert -verbose \"$photo\" -crop {$width}x{$height}+{$xoffset}+{$yoffset} -thumbnail {$new_height}x{$new_height} \"$cachedphoto\"";
   }
   else {
-    $cmd = "convert -verbose \"" . $photo . "\" -resize {$new_width}x{$new_height} -bordercolor \"#9999A9\" -border 1 -bordercolor black -border 2 -quality 75 \"" . $cachedphoto . "\"";
+    $cmd = "convert -verbose \"$photo\" -resize {$new_width}x{$new_height} -bordercolor \"#9999A9\" -border 1 -bordercolor black -border 2 -quality $quality \"$cachedphoto\"";
   }
   @exec($cmd, $output, $ret_var);
   if ($ret_var) {
