@@ -1,4 +1,4 @@
-$(function() {
+$(document).ready(function() {
     setTimeout(clearCache, 3000);
 });
 
@@ -23,7 +23,7 @@ function clearCacheError() {
 
 function showMessage(msg) {
   $('#message').html(msg);
-  $('#message').slideDown('fast', function() { setTimeout(hideMessage, 3000); });
+  $('#message').slideDown('fast', function() { setTimeout(hideMessage, 5000); });
   positionMessage();
   $(window).bind('scroll', positionMessage);
 }
