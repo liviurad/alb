@@ -1,3 +1,8 @@
+v0.92 - clear cache
+- add message tooltip at the top of visible area
+- use AJAX call to trim/clear the cache
+- cache lifetime is customizable, see config.php
+
 v0.91 - improvements
 - image quality used when resizing can be customized, see config.php
 - include some config values in the cached filenames in order to make 
@@ -9,17 +14,12 @@ v0.9 - switch to ImageMagick
 - other small visual changes
 
 v0.8 - Initial version
-DONE:
-- uploading photos is done via FTP (most probably there won't be other way 
-for uploading)
+- uploading photos is done via FTP
 - simply place your folders/albums with photos into 'photos/' folder (default). 
-That should be all.
 - read and customize config.php
-- the look of your gallery can be customized, see config.php where you can 
-change the template and/or css used
+- the look of your gallery can be customized, 
+- see config.php where you can change the template and/or css used
 - no DBs are used and won't be in the future versions
 - photos are resized on server to fit user's browser window
 - resized versions are cached. Please set 777 permisions to 'cache/' folder
 - uses a slightly modified slimbox2 to display photos
-TODO:
-- clean up cache based on files access. 

@@ -1,10 +1,10 @@
 body {
-	margin: 0 auto;
-	padding: 0;
+	margin: 0px auto;
+	padding: 0px;
 	font: 14px Georgia, sans-serif;
 	background: #1F1F1F;
   color: #DDDDDD;
-  width: 780px;
+  width: 770px;
 }
 
 a {
@@ -29,6 +29,23 @@ div#header {
   clear: both;
 }
 
+div#message {
+  clear: both;
+	position: absolute;
+  top: -100px;
+  border: 2px solid #DAA520;
+  -moz-border-radius-bottomleft: 4px;
+  -moz-border-radius-bottomright: 4px;
+  -webkit-border-bottom-left-radius: 4px;
+  -webkit-border-bottom-right-radius: 4px;
+  background: #EEDD82;
+  color: #444444;
+  padding: 2 4 2 4;
+  display: none;
+  z-index: 999;
+  font-weight: normal;
+}
+
 div#content {
   clear: both;
 }
@@ -37,9 +54,13 @@ div#footer {
   clear: both;
 	border-top: dotted 1px #777777;
 	padding-bottom: 5px;
-	margin: 0 0 30px 0;
+	margin: 0 0 10px 0;
 	font: 80% Monospace;
   text-align: right;
+}
+
+span.red {
+  color: #df0000;
 }
 
 .breadcrumb_nav {
@@ -58,7 +79,7 @@ div#footer {
 .gallery_desc {
 	border-top: dotted 1px #777777;
 	padding-bottom: 5px;
-	margin: 0 0 30px 0;
+	margin: 0 0 10px 0;
 	font: 80% Monospace;
   text-align: right;
 }

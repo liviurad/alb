@@ -3,20 +3,22 @@ $(function() {
 });
 
 function clearCache() {
-  showMessage("Trimmimg cache...");
   $.ajax({
     url: "run.php?cmd=trim_cache",
     success: clearCacheSuccess,
-    error: clearCacheError
+    error: clearCacheError,
+    dataType: 'xml'
   });
 }
 
-function clearCacheSuccess() {
-  showMessage("Cache trimmed.");
+function clearCacheSuccess(data) {
+  if ($(data).find("status").text() != "OK" || $(data).find("show_message").text() == "yes") {
+    showMessage($(data).find("message").text());
+  }
 }
 
 function clearCacheError() {
-  showMessage("<span class=\"red\">Cache trimming failed!</span>");
+  showMessage("<span class=\"red\">Trim cache failed!</span>");
 }
 
 function showMessage(msg) {

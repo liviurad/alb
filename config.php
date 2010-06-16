@@ -62,7 +62,7 @@ class Config
 
   // TODO: implemnt cache
   const CACHE_PATH     = "cache/";
-  const CACHE_LIFETIME = "30"; // days
+  const CACHE_LIFETIME = "120"; // days
 
   // images dimensions (heights) to chose from when tries to fit picture to user browser visible area
   static $DIMS = array("T" => 120, "S" => 270, "M" => 400, "L" => 540, "XL" => 680, "X2" => 860, "X3" => 1040);
