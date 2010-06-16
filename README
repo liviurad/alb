@@ -5,6 +5,7 @@ HOWTO
 
 - uploading photos is done via FTP (most probably there won't be other way for uploading)
 - simply place your folders/albums with photos in the 'photos/' folder. That should be all.
+- create "cache/" and "photos/" folders. Set 777 permisions to 'cache/' folder
 
 Details/Features
 ================
