@@ -52,7 +52,7 @@ class Config
   // gallery title
   const TITLE = "Alb Demo";
   // text displayed right under title
-  const DESC  = "http://github.com/liviurad/alb - click \"Download Source\" button";
+  const DESC  = "Go <a href=\"http://github.com/liviurad/alb\">here</a> and click \"Download Source\" button";
   // text displayed at the bottom, html allowed
   const FOOTER_TEXT = "Copyright (C) 2010 Liviu Radulescu";
   # TODO: keywords, SEO
