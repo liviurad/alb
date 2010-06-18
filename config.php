@@ -60,7 +60,7 @@ class Config
   // language
   const LANG = 'en';
 
-  // TODO: implemnt cache
+  // cache for resized photos
   const CACHE_PATH     = "cache/";
   const CACHE_LIFETIME = "120"; // days
 
@@ -68,7 +68,6 @@ class Config
   static $DIMS = array("T" => 120, "S" => 270, "M" => 400, "L" => 540, "XL" => 680, "X2" => 860, "X3" => 1040);
 
   const IMG_QUALITY = 85;
-
 
   // breadcrumb nav delimiter
   const BT_NAV_DELIM = ">";
