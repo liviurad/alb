@@ -19,8 +19,8 @@
 }
 
 .lbLoading {
-	/*background: #5C5E61 url(loading.gif) no-repeat center;*/
-  background: #5C5E61;
+	background: #5C5E61 url(loading.gif) no-repeat center;
+  /*background: #5C5E61;*/
 }
 
 #lbImage {
