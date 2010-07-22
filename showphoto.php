@@ -64,7 +64,7 @@ elseif ($size && Config::$DIMS[$size]) {
 elseif (!$new_height && !$size && $sh) {
   foreach (Config::$DIMS as $d => $h) {
     $w = $rap * $h;
-    if ($w <= ($sw - 40) && $h <= ($sh - 120) && $h > $new_height) {
+    if ($w <= ($sw - 40) && $h <= ($sh - 60) && $h > $new_height) {
       $new_height = $h;
       $size = $d;
     }
