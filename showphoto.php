@@ -40,6 +40,7 @@ $imgsize = getimagesize($photo);
 @error_log("$photo {$imgsize['mime']} {$imgsize['type']}");
 $width = $imgsize[0];
 $height = $imgsize[1];
+$rap = $width / $height;
 
 $size = isset($_GET['size']) ? $_GET['size'] : 0;
 $sw = isset($_GET['sw']) ? $_GET['sw'] : 0;
@@ -62,7 +63,8 @@ elseif ($size && Config::$DIMS[$size]) {
 // else, try to make the best choice from the dimensions to fill the user browser visible area
 elseif (!$new_height && !$size && $sh) {
   foreach (Config::$DIMS as $d => $h) {
-    if ($h <= ($sh - 120) && $h > $new_height) {
+    $w = $rap * $h;
+    if ($w <= ($sw - 40) && $h <= ($sh - 120) && $h > $new_height) {
       $new_height = $h;
       $size = $d;
     }
@@ -91,10 +93,10 @@ if ($squared) {
   }
 }
 elseif ($new_height) {
-  $new_width = round($width * $new_height / $height);
+  $new_width = round($rap * $new_height);
 }
 
-$logline = "INFO: $photo ($size, W {$sw}x{$sh}) - resize ({$width}x{$height} => {$new_width}x{$new_height})";
+$logline = "INFO: $photo (window:{$sw}x{$sh}) - resize to $size ({$width}x{$height} => {$new_width}x{$new_height})";
 
 $quality = Config::IMG_QUALITY;
 
