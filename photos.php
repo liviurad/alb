@@ -66,7 +66,7 @@ class Photos {
     if (isset($exif_data['FNumber'])) {
       $value = $exif_data['FNumber'];
       list($a, $b) = split("/", $value);
-      $fnumber = "F" . ($a / $b);
+      $fnumber = "F" . round($a / $b, 1);
     }
     $iso = isset($exif_data['ISOSpeedRatings']) ? "ISO" . $exif_data['ISOSpeedRatings'] : '';
     if (isset($exif_data['FocalLength'])) {
