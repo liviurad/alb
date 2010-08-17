@@ -15,19 +15,18 @@
 	position: absolute;
 	z-index: 9999;
 	overflow: hidden;
-	background-color: #5C5E61;
+	background-color: #000000;
 }
 
 .lbLoading {
-	background: #5C5E61 url(loading.gif) no-repeat center;
-  /*background: #5C5E61;*/
+	background: #000000 url(lightbox-ico-loading.gif) no-repeat center;
 }
 
 #lbImage {
 	position: absolute;
 	left: 0;
 	top: 0;
-	border: 7px solid #5C5E61;
+	border: 7px solid #000000;
 	background-repeat: no-repeat;
 }
 
@@ -61,7 +60,7 @@
 	color: #ddd;
 	line-height: 1.4em;
 	text-align: left;
-	border: 7px solid #5C5E61;
+	border: 7px solid #000000;
 	border-top-style: none;
 }
 
