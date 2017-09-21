@@ -45,16 +45,16 @@ class Config
     // image to use when an album (folder) is empty
     const EMPTY_ALBUM_IMG = "images/empty_album.png";
     // max album title length
-    const ALBUM_NAME_MAX_LEN = 30; # TODO: imlement name truncation
+    const ALBUM_NAME_MAX_LEN = 30; # TODO: implement name truncation
     // suffix to add when name is truncated
     const ALBUM_NAME_TRUNC_SUFFIX = '...';
 
     // gallery title
     const TITLE = "Alb Demo";
     // text displayed right under title
-    const DESC = "Go <a href=\"http://github.com/liviurad/alb\">here</a> and click \"Download Source\" button";
+    const DESC = "a href=\"http://github.com/liviurad/alb\">source code</a>";
     // text displayed at the bottom, html allowed
-    const FOOTER_TEXT = "Copyright (C) 2010 Liviu Radulescu";
+    const FOOTER_TEXT = "Copyright (C) 2010 Liv Ra";
     # TODO: keywords, SEO
 
     // language

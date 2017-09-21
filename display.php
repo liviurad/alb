@@ -23,127 +23,154 @@
 include_once("config.php");
 include_once("strings.php");
 
-class Display {
+class Display
+{
 
-  protected $photos;
-  protected $template;
-  protected $template_filename;
-  protected $template_compiled;
-  protected $text;
+    protected $photos;
+    protected $template;
+    protected $template_filename;
+    protected $template_compiled;
+    protected $text;
 
-  function __construct($photos = array(), $template = Config::TEMPLATE) {
-    $this->setPhotos($photos);
-    $this->setTemplate($template);
-    $this->text = Strings::getInstance("en");
-  }
-
-  function setTemplate($template = Config::TEMPLATE) {
-    $this->template = $template;
-    $this->template_filename = Config::ROOT_FOLDER . "templates/" . $this->template . ".tpl";
-  }
-
-  function getTemplate() { return $this->template; }
-
-  function getTemplateFilename() { return $this->template_filename; }
-
-  function setTemplateCompiled($t) { $this->template_compiled = $t; }
-
-  function getTemplateCompiled() { return $this->template_compiled; }
-
-  function setPhotos($photos = array()) { $this->photos = $photos; }
-
-  function getPhotos() { return $this->photos; }
-
-  protected function getPageNav() {
-    $r = '';
-    return $r;
-  }
-
-  protected function getBreadcrumbNav() {
-    $photos_obj = Photos::getInstance();
-    error_log($photos_obj->getAlbum());
-    $parents = explode('/', $photos_obj->getAlbum());
-    $links = array();
-    $links[] = '<a href="?album=">' . urlencode($this->text->home()) . '</a>';
-    $prev = array();
-    $cur_album = array_pop($parents);
-    foreach ($parents as $parent) {
-      if (!$parent) continue;
-      $prev[] = $parent;
-      $links[] = '<a href="?album=' . urlencode(implode('/', $prev)) . '">' . htmlentities($parent) . '</a>';
+    function __construct($photos = array(), $template = Config::TEMPLATE)
+    {
+        $this->setPhotos($photos);
+        $this->setTemplate($template);
+        $this->text = Strings::getInstance("en");
     }
-    if ($cur_album) $links[] = '<span class="current_album">' . htmlentities($cur_album) .'</span>';
-    $r = implode(' ' . Config::BT_NAV_DELIM . ' ', $links);
 
-    return $r;
-  }
+    function setTemplate($template = Config::TEMPLATE)
+    {
+        $this->template = $template;
+        $this->template_filename = Config::ROOT_FOLDER . "templates/" . $this->template . ".html";
+    }
 
-  protected function getThumbnails() {
-    $r = '';
-    $photos = $this->getPhotos();
-    for ($i = 0; $i < Config::THUMBS_PER_PAGE; $i++) {
-      if ($i >= count($photos)) break;
-      $album = $photos[$i]['album'];
-      $path  = $photos[$i]['path'];
-      $name  = $photos[$i]['name'];
-      $thumb = $photos[$i]['thumb'];
-      $info  = $photos[$i]['info'];
-      $img_thumb = sprintf('<img src="showphoto.php?photo=%s&size=thumb" alt="' . htmlentities($photos[$i]['type']) . '">', urlencode($thumb));
-      if ($photos[$i]['type'] == 'album') {
-        $target_album = ($album ? $album . '/' : '') . $name;
-        if ($thumb == Config::FOLDER_THUMB_DEFAULT || $thumb == Config::EMPTY_ALBUM_IMG) {
-          $img_thumb = sprintf('<img src="%s" alt="' . htmlentities($photos[$i]['type']) . '">', $thumb);
+    function getTemplate()
+    {
+        return $this->template;
+    }
+
+    function getTemplateFilename()
+    {
+        return $this->template_filename;
+    }
+
+    function setTemplateCompiled($t)
+    {
+        $this->template_compiled = $t;
+    }
+
+    function getTemplateCompiled()
+    {
+        return $this->template_compiled;
+    }
+
+    function setPhotos($photos = array())
+    {
+        $this->photos = $photos;
+    }
+
+    function getPhotos()
+    {
+        return $this->photos;
+    }
+
+    protected function getPageNav()
+    {
+        $r = '';
+        return $r;
+    }
+
+    protected function getBreadcrumbNav()
+    {
+        $photos_obj = Photos::getInstance();
+        $parents = explode('/', $photos_obj->getAlbum());
+        $links = array();
+        $links[] = '<a href="?album=">' . urlencode($this->text->home()) . '</a>';
+        $prev = array();
+        $cur_album = array_pop($parents);
+        foreach ($parents as $parent) {
+            if (!$parent) continue;
+            $prev[] = $parent;
+            $links[] = '<a href="?album=' . urlencode(implode('/', $prev)) . '">' . htmlentities($parent) . '</a>';
         }
-        $r .= '<div><a href="?album=' . urlencode($target_album) . '">' . 
-          '<span class="album_title">' . htmlentities($name) . '</span>' . 
-          $img_thumb . '</a></div>' . "\n";
-      }
-      elseif ($photos[$i]['type'] == 'photo') {
-        $r .= '<div><a href="showphoto.php?photo=' . 
-          urlencode($path) . '" rel="lightbox-sal" title="' .
-          htmlentities($info) . '"><span></span>' . 
-          $img_thumb .
-          '</a></div>' . "\n";
-      }
+        if ($cur_album) $links[] = '<span class="current_album">' . htmlentities($cur_album) . '</span>';
+        $r = implode(' ' . Config::BT_NAV_DELIM . ' ', $links);
+
+        return $r;
     }
 
-    return $r;
-  }
+    protected function getThumbnails()
+    {
+        $r = '';
+        $photos = $this->getPhotos();
+        for ($i = 0; $i < Config::THUMBS_PER_PAGE; $i++) {
+            if ($i >= count($photos)) break;
+            $album = $photos[$i]['album'];
+            $path = $photos[$i]['path'];
+            $name = $photos[$i]['name'];
+            $thumb = $photos[$i]['thumb'];
+            $info = $photos[$i]['info'];
+            $img_thumb = sprintf('<img src="showphoto.php?photo=%s&size=thumb" alt="' . htmlentities($photos[$i]['type']) . '">', urlencode($thumb));
+            if ($photos[$i]['type'] == 'album') {
+                $target_album = ($album ? $album . '/' : '') . $name;
+                if ($thumb == Config::FOLDER_THUMB_DEFAULT || $thumb == Config::EMPTY_ALBUM_IMG) {
+                    $img_thumb = sprintf('<img src="%s" alt="' . htmlentities($photos[$i]['type']) . '">', $thumb);
+                }
+                $r .= '<div><a href="?album=' . urlencode($target_album) . '">' .
+                    '<span class="album_title">' . htmlentities($name) . '</span>' .
+                    $img_thumb . '</a></div>' . "\n";
+            } elseif ($photos[$i]['type'] == 'photo') {
+                $r .= '<div><a href="showphoto.php?photo=' .
+                    urlencode($path) . '" rel="lightbox-sal" title="' .
+                    htmlentities($info) . '"><span></span>' .
+                    $img_thumb .
+                    '</a></div>' . "\n";
+            }
+        }
 
-  protected function compileTemplate() {
-    $template_string = file_get_contents($this->getTemplateFilename());
-    if ($template_string === false) {
-      # TODO: handle error
+        return $r;
     }
 
-    $placeholders = array(
-      "/<% title %>/",
-      "/<% stylesheet %>/",
-      "/<% root_folder %>/",
-      "/<% gallery_desc %>/",
-      "/<% breadcrumb_navigation %>/",
-      "/<% thumbnails %>/",
-      "/<% page_navigation %>/",
-      "/<% footer_text %>/",
-    );
+    protected function compileTemplate()
+    {
+        $template_string = file_get_contents($this->getTemplateFilename());
+        if ($template_string === false) {
+            # TODO: handle error
+            @error_log("ERROR: something went wrong getting the template file!");
+        }
 
-    $replacements = array(
-      Config::TITLE,
-      Config::STYLESHEET,
-      Config::ROOT_FOLDER,
-      Config::DESC,
-      $this->getBreadcrumbNav(),
-      $this->getThumbnails(),
-      $this->getPageNav(),
-      Config::FOOTER_TEXT,
-    );
+        $placeholders = array(
+            "/<% title %>/",
+            "/<% stylesheet %>/",
+            "/<% root_folder %>/",
+            "/<% gallery_desc %>/",
+            "/<% breadcrumb_navigation %>/",
+            "/<% thumbnails %>/",
+            "/<% page_navigation %>/",
+            "/<% footer_text %>/",
+        );
 
-    $this->setTemplateCompiled(preg_replace($placeholders, $replacements, $template_string));
-  }
+        $replacements = array(
+            Config::TITLE,
+            Config::STYLESHEET,
+            Config::ROOT_FOLDER,
+            Config::DESC,
+            $this->getBreadcrumbNav(),
+            $this->getThumbnails(),
+            $this->getPageNav(),
+            Config::FOOTER_TEXT,
+        );
 
-  function on() {
-    $this->compileTemplate();
-    print $this->getTemplateCompiled();
-  }
+        $compiled_template = preg_replace($placeholders, $replacements, $template_string);
+        $this->setTemplateCompiled($compiled_template);
+
+    }
+
+    function on()
+    {
+        $this->compileTemplate();
+        print $this->getTemplateCompiled();
+    }
 }
 
