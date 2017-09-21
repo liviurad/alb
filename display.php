@@ -146,4 +146,4 @@ class Display {
     print $this->getTemplateCompiled();
   }
 }
-?>
+

@@ -55,4 +55,3 @@ class Strings
 
   function loading() { return $this->data[$this->lang]["loading"]; }
 }
-?>
