@@ -54,8 +54,7 @@ class Config
     // text displayed right under title
     const DESC = "<a href=\"http://github.com/liviurad/alb\">source code</a>";
     // text displayed at the bottom, html allowed
-    const FOOTER_TEXT = "Copyright (C) 2010 Liv Ra";
-    # TODO: keywords, SEO
+    const FOOTER_TEXT = "&copy; 2017 Liv Ra";
 
     // language
     const LANG = 'en';

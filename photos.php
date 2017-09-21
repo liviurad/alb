@@ -79,7 +79,7 @@ class Photos
     function getPhotoInfo($path)
     {
         $fnumber = $iso = $focal_length = '';
-        $exif_data = exif_read_data($path);
+        $exif_data = @exif_read_data($path);
         $exposure = isset($exif_data['ExposureTime']) ? $exif_data['ExposureTime'] : '';
         if (isset($exif_data['FNumber'])) {
             $value = $exif_data['FNumber'];
