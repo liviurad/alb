@@ -29,4 +29,4 @@ $album = isset($_GET['album']) ? $_GET['album'] : NULL;
 $display = new Display(Photos::getInstance($album)->get());
 
 $display->on();
-?>
+

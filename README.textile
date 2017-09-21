@@ -9,7 +9,7 @@
 
 *Details/Features* 
 
-- *(read (and customize) config.php)*
+- read (and customize) config.php
 
 *ToDo*
 
