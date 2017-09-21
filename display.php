@@ -169,6 +169,7 @@ class Display
 
     function on()
     {
+        # SEEME don't store compiled template in memory, just compile it when requested and return it
         $this->compileTemplate();
         print $this->getTemplateCompiled();
     }
