@@ -1,3 +1,7 @@
+v0.93 - update to 2017
+- upgrade to PHP 7
+- fix html template
+- small fixes and optimizations
 v0.92 - clear cache
 - add message tooltip at the top of visible area
 - use AJAX call to trim/clear the cache
