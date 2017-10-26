@@ -13,6 +13,7 @@
 
 *ToDo*
 
+- use some javascipt package manager (npm?) to install external dependencies
 - show more info from EXIF
 - create textfile per album where one can customize album a bit or set some values:
   - (re)name photo/album
